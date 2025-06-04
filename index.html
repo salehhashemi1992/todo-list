@@ -69,6 +69,10 @@ function createTodoElement(todo){
 /* ---------- ویرایش متن ---------- */
 function enableEdit(id){
     const liSpan = document.querySelector(\`li[data-id="\${id}"] span\`);
+    if (!liSpan) {
+        console.warn(`Span element not found for todo item ${id}. Possibly already in edit mode or item removed.`);
+        return;
+    }
     const oldText = liSpan.innerText;
 
     /* جایگزینی input */
@@ -84,8 +88,11 @@ function enableEdit(id){
         if(e.key==='Enter') input.blur();
     });
 
-    liSpan.replaceWith(input);
-    input.focus();
+    // Only proceed if liSpan is valid
+    if (liSpan) {
+        liSpan.replaceWith(input);
+        input.focus();
+    }
 }
 
 function saveEdit(id, inputEl){
