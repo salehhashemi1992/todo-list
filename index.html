@@ -68,8 +68,9 @@ function createTodoElement(todo){
 
 /* ---------- ویرایش متن ---------- */
 function enableEdit(id){
-    const liSpan = document.querySelector(\`li[data-id="\${id}"] span\`);
+    const liSpan = document.querySelector(`li[data-id="${id}"] span`); // Use normal backticks
     if (!liSpan) {
+        // Correctly formatted template literal for console.warn
         console.warn(`Span element not found for todo item ${id}. Possibly already in edit mode or item removed.`);
         return;
     }
